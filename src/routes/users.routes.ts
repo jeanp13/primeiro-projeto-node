@@ -4,6 +4,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import uploadConfig from '../config/upload';
 
 import CreateUserService from '../services/CreateUserService';
+import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
@@ -20,9 +21,16 @@ usersRouter.post('/', async (request, response) => {
       password,
     });
 
-    delete user.password;
+    const userWithoutPassord = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+      avatar: user.avatar,
+    };
 
-    return response.json(user);
+    return response.json(userWithoutPassord);
   } catch (err) {
     return response.status(400).json({ message: err.message });
   }
@@ -33,7 +41,23 @@ usersRouter.patch(
   ensureAuthenticated,
   upload.single('avatar'),
   async (request, response) => {
-    return response.json({ ok: true });
+    const updateUserAvatar = new UpdateUserAvatarService();
+
+    const user = await updateUserAvatar.execute({
+      user_id: request.user.id,
+      avatarFileName: request.file.filename,
+    });
+
+    const userWithoutPassord = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+      avatar: user.avatar,
+    };
+
+    return response.json(userWithoutPassord);
   },
 );
 
