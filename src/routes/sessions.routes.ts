@@ -22,7 +22,7 @@ sessionsRouter.post('/', async (request, response) => {
     avatar: user.avatar,
   };
 
-  return response.json({ userWithoutPassord, token });
+  return response.json({ user: userWithoutPassord, token });
 });
 
 export default sessionsRouter;
