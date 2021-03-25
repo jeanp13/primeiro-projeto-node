@@ -23,20 +23,21 @@
         "prettier"
     ],
     "rules": {
+      "no-underscore-dangle":"off",
+      "prettier/prettier": "error",
+      "class-methods-use-this":"off",
+      "@typescript-eslint/camelcase": "off",
+      "@typescript-eslint/no-unused-vars": [ "error", {
+        "argsIgnorePattern": "_"
+        }],
+      "@typescript/interface-name-prefix" : ["error", {"prefixWithI" : "always"}],
       "import/extensions": [
         "error",
         "ignorePackages",
         {
           "ts": "never"
         }
-      ],
-      "prettier/prettier": "error",
-      "class-methods-use-this":"off",
-      "@typescript-eslint/camelcase": "off",
-      "@typescript-eslint/no-unused-vars": [ "error", {
-        "argsIgnorePattern": "_"
-      }],
-      "camelcase": "off"
+      ]
     },
     "settings": {
       "import/resolver": {
