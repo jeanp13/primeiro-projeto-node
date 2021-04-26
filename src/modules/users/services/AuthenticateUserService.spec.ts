@@ -31,7 +31,7 @@ describe('CreateAppointment', () => {
     expect(reponse).toHaveProperty('token');
   });
 
-  it('should not be able login with incorect user', async () => {
+  it('should not be able to authenticate with incorect user', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
     const createUserService = new CreateUserService(
@@ -57,7 +57,7 @@ describe('CreateAppointment', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able login with incorect password', async () => {
+  it('should not be able to authenticate with incorect password', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
     const createUserService = new CreateUserService(
