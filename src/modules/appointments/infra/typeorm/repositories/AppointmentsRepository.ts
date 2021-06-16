@@ -1,6 +1,7 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, Raw, Repository } from 'typeorm';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
+import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IAppointmentsRepositoy from '@modules/appointments/repositories/IAppointmentsRepository';
 
 @EntityRepository(Appointment)
@@ -31,6 +32,26 @@ class AppointmentsRepository implements IAppointmentsRepositoy {
     await this.ormRepository.save(appointment);
 
     return appointment;
+  }
+
+  public async findAllInMonthFromProvider({
+    provider_id,
+    month,
+    year,
+  }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
+    const parsedMonth = String(month).padStart(2, '0');
+
+    const appointments = await this.ormRepository.find({
+      where: {
+        provider_id,
+        date: Raw(
+          dateFieldName =>
+            `to_char(${dateFieldName}, 'MM-YYYY) = '${parsedMonth}-${year}'`,
+        ),
+      },
+    });
+
+    return appointments;
   }
 }
 
