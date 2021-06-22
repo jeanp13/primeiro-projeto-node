@@ -25,9 +25,42 @@ describe('ListProviderMonthAvailability', () => {
 
     await fakeAppointmentRepository.create({
       provider_id: 'user',
-      date: new Date(2021, 5, 17, 8, 0, 0),
+      date: new Date(2021, 5, 16, 10, 0, 0),
     });
 
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 11, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 12, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 13, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 14, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 15, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 16, 0, 0),
+    });
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 16, 17, 0, 0),
+    });
+
+    await fakeAppointmentRepository.create({
+      provider_id: 'user',
+      date: new Date(2021, 5, 17, 17, 0, 0),
+    });
     const availability = await listProviderMonthAvailability.execute({
       provider_id: 'user',
       year: 2021,
@@ -36,10 +69,10 @@ describe('ListProviderMonthAvailability', () => {
 
     expect(availability).toEqual(
       expect.arrayContaining([
-        { day: 15, availability: true },
-        { day: 16, availability: false },
-        { day: 17, availability: false },
-        { day: 18, availability: true },
+        { day: 15, available: true },
+        { day: 16, available: false },
+        { day: 17, available: true },
+        { day: 18, available: true },
       ]),
     );
   });
