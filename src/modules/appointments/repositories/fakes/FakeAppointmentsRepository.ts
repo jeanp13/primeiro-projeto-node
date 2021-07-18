@@ -19,12 +19,13 @@ class FakeAppointmentsRepository implements IAppointmentsRepositoy {
 
   public async create({
     provider_id,
+    user_id,
     date,
   }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment();
 
     // assign serve para unificar objeto, neste caso ele pega os valores do segundo parametro e uni com o primeiro, substituia a criaçaõ manual
-    Object.assign(appointment, { id: uuid(), date, provider_id });
+    Object.assign(appointment, { id: uuid(), date, provider_id, user_id });
 
     // substituido pelo Object.assign
     // appointment.id = uuid();
