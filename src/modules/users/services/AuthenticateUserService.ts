@@ -32,7 +32,13 @@ export default class AuthenticateUserService {
     if (!user) {
       throw new AppError('Incorrect email/password combination.', 401);
     }
-
+    // const ps = await this.hashProvider.generateHash(password);
+    // const ps1 = await this.hashProvider.generateHash(password);
+    // const ps2 = await this.hashProvider.generateHash(password);
+    // console.log(ps);
+    // console.log(ps1);
+    // console.log(ps2);
+    // console.log(user.password);
     const passwordMatched = await this.hashProvider.compareHash(
       password,
       user.password,

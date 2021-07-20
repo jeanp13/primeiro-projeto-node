@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
-import User from '../../typeorm/entities/User';
+import { classToClass } from 'class-transformer';
 
 export default class ProfileController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -16,16 +16,7 @@ export default class ProfileController {
         user_id,
       });
 
-      const userWithoutPassord = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        created_at: user.created_at,
-        updated_at: user.updated_at,
-        avatar: user.avatar,
-      };
-
-      return response.json(userWithoutPassord);
+      return response.json({ user: classToClass(user) });
     } catch (err) {
       return response.status(400).json({ message: err.message });
     }
@@ -45,16 +36,7 @@ export default class ProfileController {
         password,
       });
 
-      const userWithoutPassord = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        created_at: user.created_at,
-        updated_at: user.updated_at,
-        avatar: user.avatar,
-      };
-
-      return response.json(userWithoutPassord);
+      return response.json({ user: classToClass(user) });
     } catch (err) {
       return response.status(400).json({ message: err.message });
     }
