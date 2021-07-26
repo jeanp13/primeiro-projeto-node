@@ -7,7 +7,7 @@ import UsersController from '../controller/UsersController';
 import UpdateAvatarController from '../controller/UpdateAvatarController';
 
 const usersRouter = Router();
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 const usersController = new UsersController();
 const updateAvatarController = new UpdateAvatarController();
 

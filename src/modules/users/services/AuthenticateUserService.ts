@@ -45,7 +45,7 @@ export default class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      // throw new AppError('Incorrect email/password combination p.', 401);
+      throw new AppError('Incorrect email/password combination p.', 401);
     }
     const { secret, expiresIn } = authConfig.jwt;
 
