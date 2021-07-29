@@ -1,5 +1,4 @@
 import { container } from 'tsyringe';
-import uploadConfig from '@config/upload';
 
 import IStrorageProvider from './models/IStorageProvider';
 import DiskStorageProvider from './implementations/DiskStorafeProvider';
