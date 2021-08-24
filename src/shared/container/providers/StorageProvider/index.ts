@@ -9,4 +9,7 @@ const providers = {
   s3: S3StorageProvider,
 };
 
-container.registerSingleton<IStrorageProvider>('StorageProvider', providers.s3);
+container.registerSingleton<IStrorageProvider>(
+  'StorageProvider',
+  providers.disk,
+);
