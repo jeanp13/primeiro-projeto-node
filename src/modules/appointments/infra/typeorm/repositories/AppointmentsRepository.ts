@@ -55,6 +55,9 @@ class AppointmentsRepository implements IAppointmentsRepositoy {
             `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`,
         ),
       },
+      order: {
+        date: 'ASC',
+      },
     });
 
     return appointments;
@@ -76,6 +79,9 @@ class AppointmentsRepository implements IAppointmentsRepositoy {
           dateFieldName =>
             `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`,
         ),
+      },
+      order: {
+        date: 'ASC',
       },
       relations: ['user'],
     });
